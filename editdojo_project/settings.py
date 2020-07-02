@@ -25,7 +25,7 @@ SECRET_KEY = '1y#$32_$b)+xthb!k2z+x(@9nowu(vhu*)!gn(n!-(-zq9qdsz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,10 +75,17 @@ WSGI_APPLICATION = 'editdojo_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
+try:
+    from shutil import copyfile
+    copyfile(os.path.join(BASE_DIR, 'db.sqlite3'), "/tmp/db.sqlite3")
+    DB_PATH = "/tmp/db.sqlite3"
+except:
+    pass
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': DB_PATH,
     }
 }
 
@@ -119,4 +126,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
