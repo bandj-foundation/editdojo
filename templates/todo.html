@@ -1,18 +1,17 @@
-<h1>this is todo page</h1>
+<h1>Upload image to analyze</h1>
 
-<ul>
-    {% for todo_item in all_items %}
-        <li>{{ todo_item.content }}
-            <form action="/deleteTodo/{{todo_item.id}}/" 
-                  method="post"
-                  style="display: inline;">{% csrf_token %}
-                <input type="submit" value="delete" />
-            </form>
-        </li>
-    {% endfor %}
-</ul>
 
-<form action="/addTodo/" method="post">{% csrf_token %}
-    <input type="text" name="content" />
-    <input type="submit" value="Add" />
+<form action="/classifyImage/" method="post">{% csrf_token %}
+    add url: <input type="text" name="url" />
+    <input type="submit" value="Classify" />
+    <br>
+    <br>
+    Image URL is: {{cimg.img}}
+    <br>
+    <br>
+    Here is the result: {{cimg.label}}
+    <br>
+    <br>
+    <img src= {{cimg.img }} width="300" height="300" />
+    
 </form>
